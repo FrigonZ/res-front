@@ -18,6 +18,8 @@ module.exports = {
     },
     ecmaVersion: 13,
     sourceType: 'module',
+    tsconfigRootDir: __dirname,
+    project: './tsconfig.json'
   },
   plugins: [
     'react',
@@ -34,6 +36,8 @@ module.exports = {
         tsx: 'never',
       },
     ],
+    'import/prefer-default-export': 'off',
     'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
   },
+  "ignorePatterns": ["index.js", ".eslintrc.js"]
 };
