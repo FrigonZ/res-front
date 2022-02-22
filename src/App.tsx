@@ -1,25 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import { Provider } from 'react-redux';
+import React, { useEffect } from 'react';
+import {
+  HashRouter, Route, Routes,
+} from 'react-router-dom';
 import { checkToken, initToken } from './auth/token';
 import Login from './page/login';
-import Main from './page/main';
-import { store } from './store';
+import PageFrame from './page/page-frame';
+import { routers } from './page/route';
+import { useSetIsLogin } from './store/user/hooks';
 
 function App() {
-  const [isLogin, setIsLogin] = useState(false);
+  const setLogin = useSetIsLogin();
 
   useEffect(() => {
     initToken();
-    setIsLogin(checkToken());
-  }, []);
+    const isLogin = checkToken();
+    setLogin(isLogin);
+  }, [setLogin]);
 
   return (
-    <Provider store={store}>
+    <HashRouter>
       <div className="App">
-        {isLogin ? <Main setLogin={setIsLogin} /> : <Login />}
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          {routers.map((page) => (
+            <Route
+              path={page.path}
+              element={(
+                <PageFrame>
+                  {page.component}
+                </PageFrame>
+              )}
+            />
+          ))}
+        </Routes>
       </div>
-    </Provider>
-
+    </HashRouter>
   );
 }
 
