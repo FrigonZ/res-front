@@ -17,3 +17,7 @@ export const setToken = (jwt: string) => {
   token = jwt;
   localStorage.setItem(key, token);
 };
+
+export const removeToken = () => {
+  localStorage.removeItem(key);
+};
