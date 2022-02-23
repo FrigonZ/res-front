@@ -6,7 +6,7 @@ export interface Action extends Act<string> {
 
 export const defaultState: State = {
   user: {
-    isLogin: false,
+    isLogin: true,
   },
 };
 
@@ -15,7 +15,7 @@ export interface State {
 }
 
 export const userState: UserState = {
-  isLogin: false,
+  isLogin: true,
 };
 
 export interface UserState {
