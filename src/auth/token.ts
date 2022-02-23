@@ -1,3 +1,7 @@
+/* eslint-disable import/no-cycle */
+import { CGI } from '../constant/cgi';
+import { doGet } from '../request/request';
+
 let token = '';
 
 const key = 'res-token';
@@ -8,8 +12,12 @@ export const initToken = () => {
   token = cache;
 };
 
-export const checkToken = () => {
+export const getToken = () => token;
+
+export const checkToken = async () => {
   if (!token) return false;
+  const result = await doGet(CGI.LOGIN);
+  if (result.data.code !== 0) return false;
   return true;
 };
 

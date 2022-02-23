@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   HashRouter, Route, Routes,
 } from 'react-router-dom';
@@ -6,15 +6,21 @@ import { checkToken, initToken } from './auth/token';
 import Login from './page/login';
 import PageFrame from './page/page-frame';
 import { routers } from './page/route';
+import { setInstance } from './request/request';
 import { useSetIsLogin } from './store/user/hooks';
 
 function App() {
   const setLogin = useSetIsLogin();
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     initToken();
-    const isLogin = checkToken();
-    setLogin(isLogin);
+    setInstance();
+    checkToken().then((isLogin) => {
+      setLogin(isLogin);
+      setLoading(false);
+    });
   }, [setLogin]);
 
   return (
@@ -24,6 +30,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           {routers.map((page) => (
             <Route
+              key={page.path}
               path={page.path}
               element={(
                 <PageFrame>
@@ -33,6 +40,7 @@ function App() {
             />
           ))}
         </Routes>
+        {isLoading ? <div className="load-wrap" /> : null}
       </div>
     </HashRouter>
   );

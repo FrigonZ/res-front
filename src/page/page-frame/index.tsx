@@ -18,7 +18,7 @@ function PageFrame({ children = null }:Props) {
   return isLogin ? (
     <>
       {routers.map((page) => (
-        <Link to={page.path}>{page.name}</Link>
+        <Link key={page.path} to={page.path}>{page.name}</Link>
       ))}
       <Button onClick={logOut}>退出</Button>
       {children}
