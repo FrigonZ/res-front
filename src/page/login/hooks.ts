@@ -1,27 +1,26 @@
 import { message } from 'antd';
+import { useCallback } from 'react';
 import { setToken } from '../../auth/token';
-import { doPost } from '../../request/request';
+import { usePost } from '../../request/request';
 import { useSetIsLogin } from '../../store/user/hooks';
 
 export const useLogin = () => {
   const setLogin = useSetIsLogin();
-  return async (aid: string, pwd: string) => {
+  const doPost = usePost();
+  return useCallback(async (aid: string, pwd: string) => {
     if (!aid || !pwd) {
       message.info('请输入账号密码');
       return;
     }
 
-    const rsp = await doPost('/nimda/admin', {
+    const data = await doPost('/nimda/admin', {
       aid,
       password: pwd,
     });
 
-    if (!rsp.data || rsp.data.code !== 0) {
-      message.info('登录失败');
-      return;
-    }
+    if (!data) return;
 
-    const { token } = rsp.data.data;
+    const { token } = data;
     if (!token) {
       message.info('token错误');
       return;
@@ -29,5 +28,5 @@ export const useLogin = () => {
 
     setToken(token);
     setLogin(true);
-  };
+  }, [setLogin, doPost]);
 };
