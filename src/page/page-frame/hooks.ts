@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { removeToken } from '../../auth/token';
+import { removeToken } from '../../utils/token';
 import { useSetIsLogin } from '../../store/user/hooks';
 
 export const useLogOut = () => {

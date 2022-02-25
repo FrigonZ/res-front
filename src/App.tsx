@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import {
   HashRouter, Route, Routes,
 } from 'react-router-dom';
-import { checkToken, initToken } from './auth/token';
+import { checkToken, initToken } from './utils/token';
 import Login from './page/login';
 import PageFrame from './page/page-frame';
 import { routers } from './page/route';
-import { setInstance } from './request/request';
 import { useSetIsLogin } from './store/user/hooks';
 
 function App() {
@@ -16,7 +15,6 @@ function App() {
   useEffect(() => {
     setLoading(true);
     initToken();
-    setInstance();
     checkToken().then((isLogin) => {
       setLogin(isLogin);
       setLoading(false);

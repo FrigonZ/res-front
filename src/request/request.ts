@@ -2,20 +2,23 @@
 import { message } from 'antd';
 import axios from 'axios';
 import { useCallback } from 'react';
-import { getToken } from '../auth/token';
+import { getToken, removeToken } from '../utils/token';
+import { BASE_URL } from '../constant/cgi';
 import { ResCode, ResponseData } from '../constant/protocol';
 import { useSetIsLogin } from '../store/user/hooks';
 import { joinParams } from '../utils/url';
 
+const timeout = 6000;
+
 let instance = axios.create({
-  baseURL: 'http://localhost:8080/api',
-  timeout: 6000,
+  baseURL: BASE_URL,
+  timeout,
 });
 
 export const setInstance = () => {
   instance = axios.create({
-    baseURL: 'http://localhost:8080/api',
-    timeout: 6000,
+    baseURL: BASE_URL,
+    timeout,
     headers: {
       authorization: getToken(),
     },
@@ -34,6 +37,7 @@ const useResponseHandler = () => {
       },
       [ResCode.AUTH_FAIL]: () => {
         message.error('登录过期，请重新登录');
+        removeToken();
         setLogin(false);
         return false;
       },

@@ -1,8 +1,11 @@
 import React from 'react';
+import FileUpload from '../../components/file-upload';
 
 function Dish() {
   return (
-    <div>Dish</div>
+    <div>
+      <FileUpload />
+    </div>
   );
 }
 
