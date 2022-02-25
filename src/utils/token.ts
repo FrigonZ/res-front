@@ -1,6 +1,6 @@
 /* eslint-disable import/no-cycle */
 import { CGI } from '../constant/cgi';
-import { doGet } from '../request/request';
+import { doGet, setInstance } from '../request/request';
 
 let token = '';
 
@@ -10,6 +10,7 @@ export const initToken = () => {
   if (token) return;
   const cache = localStorage.getItem(key) || '';
   token = cache;
+  setInstance();
 };
 
 export const getToken = () => token;
@@ -24,8 +25,11 @@ export const checkToken = async () => {
 export const setToken = (jwt: string) => {
   token = jwt;
   localStorage.setItem(key, token);
+  setInstance();
 };
 
 export const removeToken = () => {
   localStorage.removeItem(key);
+  token = '';
+  setInstance();
 };

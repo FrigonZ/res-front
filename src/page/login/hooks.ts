@@ -1,6 +1,6 @@
 import { message } from 'antd';
 import { useCallback } from 'react';
-import { setToken } from '../../auth/token';
+import { setToken } from '../../utils/token';
 import { usePost } from '../../request/request';
 import { useSetIsLogin } from '../../store/user/hooks';
 
