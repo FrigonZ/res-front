@@ -37,6 +37,7 @@ module.exports = {
       },
     ],
     'import/prefer-default-export': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
     'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
   },
   "ignorePatterns": ["index.js", ".eslintrc.js"]
