@@ -3,6 +3,7 @@ import { IMAGE } from '../../constant/image';
 import { Style } from '../../constant/types';
 import { generateUnid } from '../../utils/unid';
 import { useUpload } from './hooks';
+import css from './file-upload.module.css';
 
 interface Props {
   onChange?: any;
@@ -40,21 +41,21 @@ function FileUpload({
     <div style={style}>
       { url ? (
         <input
+          className={css.img}
           type="image"
           src={url}
           alt="img"
-          style={styles.img}
           onClick={handleClear}
         />
       ) : (
-        <label htmlFor={unid} style={styles.label}>
-          <img src={IMAGE.UPLOAD} alt="upload" style={styles.upload} />
+        <label className={css.label} htmlFor={unid}>
+          <img className={css.upload} src={IMAGE.UPLOAD} alt="upload" />
           <input
+            className={css.input}
             id={unid}
             ref={input}
             type="file"
             accept=".jpg,.png"
-            style={styles.input}
             onChange={handleUpload}
           />
         </label>
@@ -68,25 +69,7 @@ FileUpload.defaultProps = {
   url: '',
   style: {
     width: 40,
-    heght: 40,
-  },
-};
-
-const styles: Record<any, Style> = {
-  img: {
-    width: '100%',
-    height: '100%',
-  },
-  input: {
-    display: 'none',
-  },
-  label: {
-    width: '100%',
-    height: '100%',
-  },
-  upload: {
-    width: '100%',
-    height: '100%',
+    height: 40,
   },
 };
 
