@@ -3,7 +3,7 @@ import { IMAGE } from '../../constant/image';
 import { Style } from '../../constant/types';
 import { generateUnid } from '../../utils/unid';
 import { useUpload } from './hooks';
-import css from './file-upload.module.css';
+import less from './file-upload.module.less';
 
 interface Props {
   onChange?: any;
@@ -41,17 +41,17 @@ function FileUpload({
     <div style={style}>
       { url ? (
         <input
-          className={css.img}
+          className={less.img}
           type="image"
           src={url}
           alt="img"
           onClick={handleClear}
         />
       ) : (
-        <label className={css.label} htmlFor={unid}>
-          <img className={css.upload} src={IMAGE.UPLOAD} alt="upload" />
+        <label className={less.label} htmlFor={unid}>
+          <img className={less.upload} src={IMAGE.UPLOAD} alt="upload" />
           <input
-            className={css.input}
+            className={less.input}
             id={unid}
             ref={input}
             type="file"
