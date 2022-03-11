@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { State } from '../../constant/store';
 import { useLogin } from './hooks';
+import less from './login.module.less';
 
 function Login() {
   const username = useRef<Input>(null);
@@ -20,12 +21,14 @@ function Login() {
   };
 
   return !isLogin ? (
-    <>
-      <Text>登录</Text>
-      <Input ref={username} />
-      <Input ref={password} />
-      <Button onClick={handleClick} type="primary">登录</Button>
-    </>
+    <div className={less.wrap}>
+      <div className={less.card}>
+        <Text>登录</Text>
+        <Input ref={username} />
+        <Input ref={password} />
+        <Button onClick={handleClick} type="primary">登录</Button>
+      </div>
+    </div>
   ) : (
     <Navigate to="/" />
   );

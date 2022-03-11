@@ -4,7 +4,11 @@ export const enum UserAction {
   SET_IS_LOGIN = 'SET_IS_LOGIN',
 }
 
-export const setIsLogin = (payload: any): Action => ({
+export interface SetIsLoginPayload {
+  isLogin: boolean;
+}
+
+export const setIsLogin = (payload: SetIsLoginPayload): Action => ({
   type: UserAction.SET_IS_LOGIN,
   payload,
 });

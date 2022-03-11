@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { IMAGE } from '../../constant/image';
 import { Style } from '../../constant/types';
 import { generateUnid } from '../../utils/unid';
@@ -6,26 +6,19 @@ import { useUpload } from './hooks';
 import less from './file-upload.module.less';
 
 interface Props {
-  onChange?: any;
-  url?: string;
+  setUrl: any;
+  url: string;
   style?: Style;
 }
 
 function FileUpload({
-  onChange,
-  url: initialUrl,
+  setUrl,
+  url,
   style,
 }: Props) {
   const input = useRef<HTMLInputElement>(null);
-  const [url, setUrl] = useState(initialUrl);
   const doUpload = useUpload();
   const unid = generateUnid('fip');
-
-  useEffect(() => {
-    if (onChange) {
-      onChange(url);
-    }
-  }, [url, onChange]);
 
   const handleUpload = async () => {
     const fileList = input.current?.files;
@@ -65,8 +58,6 @@ function FileUpload({
 }
 
 FileUpload.defaultProps = {
-  onChange: null,
-  url: '',
   style: {
     width: 40,
     height: 40,

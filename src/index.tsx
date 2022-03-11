@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -6,6 +7,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { store } from './store';
 import 'antd/dist/antd.min.css';
+
+const consoleError = console.error.bind(console);
+
+console.error = (errObj, ...args) => {
+  if (args.includes('findDOMNode')) {
+    return;
+  }
+  consoleError(errObj, ...args);
+};
 
 ReactDOM.render(
   <React.StrictMode>
