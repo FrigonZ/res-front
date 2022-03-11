@@ -1,10 +1,15 @@
+import { Button } from 'antd';
 import React from 'react';
-import FileUpload from '../../components/file-upload';
+import CreateModal from '../../components/create-modal.tsx';
+import { useOpenModal } from './hooks';
 
 function Dish() {
+  const openModal = useOpenModal();
+
   return (
     <div>
-      <FileUpload />
+      <Button type="primary" onClick={openModal}>新增餐品</Button>
+      <CreateModal />
     </div>
   );
 }

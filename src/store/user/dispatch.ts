@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/default-param-last */
 import { Action, userState, UserState } from '../../constant/store';
-import { UserAction } from './action';
+import { SetIsLoginPayload, UserAction } from './action';
 
-const setIsLogin = (state: UserState, action: Action) => {
-  const { isLogin } = action.payload;
+const setIsLogin = (state: UserState, action: Action): UserState => {
+  const { isLogin } = action.payload as SetIsLoginPayload;
   return {
     ...state,
     isLogin,
