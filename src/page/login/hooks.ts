@@ -3,7 +3,9 @@ import { useCallback } from 'react';
 import { setToken } from '../../utils/token';
 import { usePost } from '../../request/request';
 import { useSetIsLogin } from '../../store/user/hooks';
+import { CGI } from '../../constant/cgi';
 
+/** 登录 */
 export const useLogin = () => {
   const setLogin = useSetIsLogin();
   const doPost = usePost();
@@ -13,7 +15,7 @@ export const useLogin = () => {
       return;
     }
 
-    const data = await doPost('/nimda/admin', {
+    const data = await doPost(CGI.LOGIN, {
       aid,
       password: pwd,
     });

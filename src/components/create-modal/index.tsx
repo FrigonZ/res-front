@@ -1,3 +1,4 @@
+/** [container]新增餐品弹窗容器 */
 import {
   Form, Input, Modal, Radio,
 } from 'antd';
@@ -12,6 +13,7 @@ const initialValue = {
   isNecessary: 0,
 };
 
+/** [container]新增餐品弹窗容器 */
 function CreateModal() {
   const { createModalVisible } = useSelector((state: State) => state.dish);
   const closeModal = useCloseModal();
@@ -19,6 +21,7 @@ function CreateModal() {
   const [url, setUrl] = useState('');
   const doSubmit = useSubmit();
 
+  /** 提交表单 */
   const handleSubmit = async () => {
     const dish: DishProps = {
       ...form.getFieldsValue(),
@@ -26,11 +29,14 @@ function CreateModal() {
       isNecessary: Boolean(form.getFieldValue('isNecessary')),
     };
     const isSuccess = await doSubmit([dish]);
+
+    // 请求成功后关闭弹窗
     if (isSuccess) {
       handleClose();
     }
   };
 
+  /** 关闭弹窗并重置表单 */
   const handleClose = () => {
     closeModal();
     form.resetFields();

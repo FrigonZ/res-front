@@ -12,6 +12,7 @@ function App() {
   const setLogin = useSetIsLogin();
   const [isLoading, setLoading] = useState(true);
 
+  // 初始化登录状态
   useEffect(() => {
     setLoading(true);
     initToken();

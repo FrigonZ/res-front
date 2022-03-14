@@ -3,7 +3,7 @@ const path = require('path');
 
 // DEVELOP
 const url = 'http://localhost:3000';
-// PRODUCT
+// PRODUCT MOCK
 // const url = `file://${path.join(__dirname, './build/index.html')}`;
 
 function createWindow() {

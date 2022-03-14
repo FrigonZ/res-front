@@ -4,7 +4,7 @@
  * @param params 参数对象
  * @returns 请求uri
  */
-export const joinParams = (uri: string, params: Record<string, string>) => {
+export const joinParams = (uri: string, params: Record<string, string>): string => {
   let result = `${uri}?`;
   Object.keys(params).forEach((key) => {
     result += `${key}=${params[key]}&`;

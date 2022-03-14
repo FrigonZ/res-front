@@ -3,6 +3,7 @@ import { CGI } from '../../constant/cgi';
 import { useGet } from '../../request/request';
 import { useSetCreateModalVisible, useSetDishes, useSetIsFetching } from '../../store/dish/hooks';
 
+/** 打开新增餐品弹窗 */
 export const useOpenModal = () => {
   const setCreateModalVisable = useSetCreateModalVisible();
   return useCallback(() => {
@@ -10,6 +11,7 @@ export const useOpenModal = () => {
   }, [setCreateModalVisable]);
 };
 
+/** 拉取餐品信息 */
 export const useFetchDishes = () => {
   const doGet = useGet();
   const setDishes = useSetDishes();
