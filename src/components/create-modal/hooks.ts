@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { CGI } from '../../constant/cgi';
 import { DishProps } from '../../constant/entity';
 import { usePost } from '../../request/request';
-import { useSetCreateModalVisible } from '../../store/dish/hooks';
+import { useAddDishes, useSetCreateModalVisible } from '../../store/dish/hooks';
 
 export const useCloseModal = () => {
   const setCreateModalVisable = useSetCreateModalVisible();
@@ -14,6 +14,7 @@ export const useCloseModal = () => {
 
 export const useSubmit = () => {
   const doPost = usePost();
+  const addDishes = useAddDishes();
   return useCallback(async (dishes: DishProps[]) => {
     const resData = await doPost(CGI.DISH, { dishes });
     if (!resData) {
@@ -22,6 +23,7 @@ export const useSubmit = () => {
     }
 
     message.success('创建成功');
+    addDishes(dishes);
     return true;
-  }, [doPost]);
+  }, [doPost, addDishes]);
 };
