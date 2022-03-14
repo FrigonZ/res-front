@@ -1,3 +1,4 @@
+/** 内容页面框架 */
 import { Button } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -12,9 +13,11 @@ export interface Props {
   children?: React.ReactNode;
 }
 
+/** 内容页面框架 */
 function PageFrame({ children = null }:Props) {
   const logOut = useLogOut();
   const { isLogin } = useSelector((state: State) => state.user);
+
   return isLogin ? (
     <>
       {routers.map((page) => (

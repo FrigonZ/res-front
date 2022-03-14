@@ -1,3 +1,4 @@
+/** [container]餐品表格容器 */
 import { Table } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import React from 'react';
@@ -6,6 +7,7 @@ import { DishProps } from '../../constant/entity';
 import { State } from '../../constant/store';
 import less from './dish-table.module.less';
 
+/** 表格列属性 */
 const columns: ColumnsType<DishProps> = [
   {
     key: 'name',
@@ -34,6 +36,7 @@ const columns: ColumnsType<DishProps> = [
     title: '必选品',
     render: (isNecessary: boolean) => (<div>{String(isNecessary)}</div>),
   },
+  // TODO: 枚举反映射
   {
     key: 'status',
     dataIndex: 'status',
@@ -46,6 +49,7 @@ const columns: ColumnsType<DishProps> = [
   },
 ];
 
+/** [container]餐品表格容器 */
 function DishTable() {
   const { dishes, isFetching } = useSelector((state: State) => state.dish);
   return (

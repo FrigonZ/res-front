@@ -1,3 +1,4 @@
+/** 登录页 */
 import { Button, Input } from 'antd';
 import Text from 'antd/lib/typography/Text';
 import React, { useRef } from 'react';
@@ -7,6 +8,7 @@ import { State } from '../../constant/store';
 import { useLogin } from './hooks';
 import less from './login.module.less';
 
+/** 登录页 */
 function Login() {
   const username = useRef<Input>(null);
   const password = useRef<Input>(null);

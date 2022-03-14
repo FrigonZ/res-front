@@ -1,9 +1,11 @@
+/** 餐品页 */
 import { Button } from 'antd';
 import React, { useEffect } from 'react';
 import CreateModal from '../../components/create-modal';
 import DishTable from '../../components/dish-table';
 import { useFetchDishes, useOpenModal } from './hooks';
 
+/** 餐品页 */
 function Dish() {
   const openModal = useOpenModal();
   const fetchDishes = useFetchDishes();
