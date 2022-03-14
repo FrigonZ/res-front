@@ -1,4 +1,5 @@
 import { Action as Act } from 'redux';
+import { DishProps } from './entity';
 
 export interface Action extends Act<string> {
   payload: any;
@@ -15,6 +16,8 @@ export const userState: UserState = {
 
 export const dishState: DishState = {
   createModalVisible: false,
+  isFetching: false,
+  dishes: [],
 };
 
 export interface UserState {
@@ -23,4 +26,6 @@ export interface UserState {
 
 export interface DishState {
   createModalVisible: boolean;
+  isFetching: boolean;
+  dishes: DishProps[];
 }

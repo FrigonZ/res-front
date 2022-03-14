@@ -38,6 +38,7 @@ module.exports = {
     ],
     'import/prefer-default-export': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
+    'react/jsx-props-no-spreading': 'off',
     'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
   },
   "ignorePatterns": ["index.js", ".eslintrc.js", "**/config/**/*.js", "**/scripts/*.js"]
