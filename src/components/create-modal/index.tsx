@@ -1,13 +1,15 @@
 /** [container]新增餐品弹窗容器 */
 import {
+  Button,
   Form, Input, Modal, Radio,
 } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { DishProps } from '../../constant/entity';
 import { State } from '../../constant/store';
+import { useSetEditDishId, useSetInialDish } from '../../store/dish/hooks';
+import { format2Dish, getDraft, setDraft } from '../../utils/draft';
 import FileUpload from '../file-upload';
-import { useCloseModal, useSubmit } from './hooks';
+import { useCloseModal, useEdit, useSubmit } from './hooks';
 
 const initialValue = {
   isNecessary: 0,
@@ -15,20 +17,36 @@ const initialValue = {
 
 /** [container]新增餐品弹窗容器 */
 function CreateModal() {
-  const { createModalVisible } = useSelector((state: State) => state.dish);
+  const { createModalVisible, initialDish, editId } = useSelector((state: State) => state.dish);
   const closeModal = useCloseModal();
   const [form] = Form.useForm();
   const [url, setUrl] = useState('');
   const doSubmit = useSubmit();
+  const doEdit = useEdit();
+  const setInitialDish = useSetInialDish();
+  const setEditId = useSetEditDishId();
+
+  useEffect(() => {
+    if (!createModalVisible) return;
+    const defaultValue = editId ? initialDish : getDraft();
+
+    if (defaultValue) {
+      form.setFieldsValue(defaultValue);
+      setUrl(defaultValue.pic || '');
+      setInitialDish(null);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [createModalVisible]);
 
   /** 提交表单 */
   const handleSubmit = async () => {
-    const dish: DishProps = {
+    const dish = format2Dish({
       ...form.getFieldsValue(),
       pic: url,
-      isNecessary: Boolean(form.getFieldValue('isNecessary')),
-    };
-    const isSuccess = await doSubmit([dish]);
+      did: editId || undefined,
+    });
+    const handler = editId ? doEdit : doSubmit;
+    const isSuccess = await handler(dish);
 
     // 请求成功后关闭弹窗
     if (isSuccess) {
@@ -36,8 +54,21 @@ function CreateModal() {
     }
   };
 
+  const handleReset = () => {
+    form.resetFields();
+    setUrl('');
+  };
+
   /** 关闭弹窗并重置表单 */
   const handleClose = () => {
+    const draft = {
+      ...form.getFieldsValue(),
+      pic: url,
+    };
+    if (!editId) {
+      setDraft(draft);
+    }
+    setEditId('');
     closeModal();
     form.resetFields();
     setUrl('');
@@ -49,6 +80,24 @@ function CreateModal() {
       visible={createModalVisible}
       onOk={handleSubmit}
       onCancel={handleClose}
+      footer={editId ? [
+        <Button key="back" onClick={handleClose}>
+          返回
+        </Button>,
+        <Button key="submit" type="primary" onClick={handleSubmit}>
+          提交
+        </Button>,
+      ] : [
+        <Button key="back" onClick={handleClose}>
+          返回
+        </Button>,
+        <Button key="reset" onClick={handleReset}>
+          重置
+        </Button>,
+        <Button key="submit" type="primary" onClick={handleSubmit}>
+          提交
+        </Button>,
+      ]}
     >
       <Form
         layout="vertical"
@@ -77,7 +126,7 @@ function CreateModal() {
         </Form.Item>
         <Form.Item
           name="isNecessary"
-          label="比选品"
+          label="必选品"
         >
           <Radio.Group>
             <Radio value={0}>否</Radio>

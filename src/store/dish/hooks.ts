@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { DishProps } from '../../constant/entity';
+import { DishForm, DishProps } from '../../constant/entity';
 import {
-  addDishes, setCreateModalVisable, setDishes, setIsFetching,
+  addDishes, setCreateModalVisable, setDishes, setEditDishId, setInitialDish, setIsFetching,
 } from './action';
 
 /** 设置新增餐品弹窗可视度 */
@@ -37,6 +37,22 @@ export const useSetIsFetching = () => {
   const dispatch = useDispatch();
   return useCallback((isFetching: boolean) => {
     const action = setIsFetching({ isFetching });
+    dispatch(action);
+  }, [dispatch]);
+};
+
+export const useSetInialDish = () => {
+  const dispatch = useDispatch();
+  return useCallback((initialDish: DishForm | null) => {
+    const action = setInitialDish({ initialDish });
+    dispatch(action);
+  }, [dispatch]);
+};
+
+export const useSetEditDishId = () => {
+  const dispatch = useDispatch();
+  return useCallback((editId: string) => {
+    const action = setEditDishId({ editId });
     dispatch(action);
   }, [dispatch]);
 };

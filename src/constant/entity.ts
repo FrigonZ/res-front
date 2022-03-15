@@ -32,7 +32,26 @@ export interface DishProps {
   /** 餐品描述 */
   desc?: string;
   /** 是否为必选品 */
-  isNecessary?: boolean;
+  isNecessary: boolean;
+  /** 餐品状态 */
+  status?: DishStatus;
+  /** 餐品自定义 */
+  options?: DishOption[];
+}
+
+export interface DishForm {
+  /** id */
+  did?: string;
+  /** 餐品名 */
+  name: string;
+  /** 餐品价格 */
+  price: number;
+  /** 餐品图片 */
+  pic?: string;
+  /** 餐品描述 */
+  desc?: string;
+  /** 是否为必选品 */
+  isNecessary: 0 | 1;
   /** 餐品状态 */
   status?: DishStatus;
   /** 餐品自定义 */

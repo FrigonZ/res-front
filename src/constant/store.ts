@@ -1,5 +1,5 @@
 import { Action as Act } from 'redux';
-import { DishProps } from './entity';
+import { DishForm, DishProps } from './entity';
 
 /** redux-action */
 export interface Action extends Act<string> {
@@ -24,6 +24,8 @@ export const dishState: DishState = {
   createModalVisible: false,
   isFetching: false,
   dishes: [],
+  initialDish: null,
+  editId: '',
 };
 
 /** 用户模块状态 */
@@ -40,4 +42,8 @@ export interface DishState {
   isFetching: boolean;
   /** 线上餐品信息 */
   dishes: DishProps[];
+  /** 新增餐品表单预设 */
+  initialDish: DishForm | null;
+  /** 编辑餐品id */
+  editId: string;
 }
