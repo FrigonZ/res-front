@@ -1,11 +1,12 @@
 /** [container]餐品表格容器 */
-import { Table } from 'antd';
+import { Button, Table } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { DishProps } from '../../constant/entity';
 import { State } from '../../constant/store';
 import less from './dish-table.module.less';
+import { useSetEditMode } from './hooks';
 
 /** 表格列属性 */
 const columns: ColumnsType<DishProps> = [
@@ -47,7 +48,27 @@ const columns: ColumnsType<DishProps> = [
     dataIndex: 'options',
     title: '自定义',
   },
+  {
+    key: 'action',
+    dataIndex: 'did',
+    title: '操作',
+    render: (did) => (
+      <EditButton did={did} />
+    ),
+  },
 ];
+
+interface Props {
+  did: string;
+}
+
+function EditButton({ did }: Props) {
+  const setEditMode = useSetEditMode();
+
+  const handleClick = () => setEditMode(did);
+
+  return <Button type="link" onClick={handleClick}>编辑</Button>;
+}
 
 /** [container]餐品表格容器 */
 function DishTable() {

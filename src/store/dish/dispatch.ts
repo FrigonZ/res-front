@@ -1,7 +1,13 @@
 /* eslint-disable @typescript-eslint/default-param-last */
 import { Action, dishState, DishState } from '../../constant/store';
 import {
-  AddDishesPayload, DishAction, SetCreateModalVisiblePaylod, SetDishesPayload, SetIsFetchingPayload,
+  AddDishesPayload,
+  DishAction,
+  SetCreateModalVisiblePaylod,
+  SetDishesPayload,
+  SetEditDishIdPayload,
+  SetInitialDishPayload,
+  SetIsFetchingPayload,
 } from './action';
 
 const setCreateModalVisable = (state: DishState, action: Action): DishState => {
@@ -39,6 +45,22 @@ const setIsFetching = (state: DishState, action: Action): DishState => {
   };
 };
 
+const setInitialDish = (state: DishState, action: Action): DishState => {
+  const { initialDish } = action.payload as SetInitialDishPayload;
+  return {
+    ...state,
+    initialDish,
+  };
+};
+
+const setEditDishId = (state: DishState, action: Action): DishState => {
+  const { editId } = action.payload as SetEditDishIdPayload;
+  return {
+    ...state,
+    editId,
+  };
+};
+
 const defaultHandler = (state: DishState): DishState => ({ ...state });
 
 const handleActionMap = {
@@ -46,6 +68,8 @@ const handleActionMap = {
   [DishAction.SET_DISHES]: setDishes,
   [DishAction.ADD_DISHES]: addDishes,
   [DishAction.SET_IS_FETCHING_DISH]: setIsFetching,
+  [DishAction.SET_INITIAL_DISH]: setInitialDish,
+  [DishAction.SET_EDIT_DISH_ID]: setEditDishId,
 };
 
 export const dish = (state: DishState = dishState, action: Action): DishState => {
