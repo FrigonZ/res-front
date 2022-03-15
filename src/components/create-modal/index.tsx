@@ -33,14 +33,15 @@ function CreateModal() {
     if (defaultValue) {
       form.setFieldsValue(defaultValue);
       setUrl(defaultValue.pic || '');
-      setInitialDish(null);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [createModalVisible]);
 
   /** 提交表单 */
   const handleSubmit = async () => {
+    const prefix = editId ? initialDish : {};
     const dish = format2Dish({
+      ...prefix,
       ...form.getFieldsValue(),
       pic: url,
       did: editId || undefined,
@@ -51,6 +52,9 @@ function CreateModal() {
     // 请求成功后关闭弹窗
     if (isSuccess) {
       handleClose();
+      if (editId) {
+        setInitialDish(null);
+      }
     }
   };
 
