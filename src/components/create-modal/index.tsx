@@ -7,7 +7,12 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { State } from '../../constant/store';
 import { useSetEditDishId, useSetInialDish } from '../../store/dish/hooks';
-import { format2Dish, getDraft, setDraft } from '../../utils/draft';
+import {
+  format2Dish,
+  getDraft,
+  removeDraft,
+  setDraft,
+} from '../../utils/draft';
 import FileUpload from '../file-upload';
 import { useCloseModal, useEdit, useSubmit } from './hooks';
 
@@ -54,6 +59,8 @@ function CreateModal() {
       handleClose();
       if (editId) {
         setInitialDish(null);
+      } else {
+        removeDraft();
       }
     }
   };
