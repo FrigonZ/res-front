@@ -1,12 +1,15 @@
 /** [container]餐品表格容器 */
-import { Button, Table } from 'antd';
+import {
+  Button, Space, Table, Tooltip,
+} from 'antd';
 import { ColumnsType } from 'antd/lib/table';
+import Text from 'antd/lib/typography/Text';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { DishProps } from '../../constant/entity';
 import { State } from '../../constant/store';
 import less from './dish-table.module.less';
-import { useSetEditMode } from './hooks';
+import { useGetToggleText, useSetEditMode, useToggleDishStatus } from './hooks';
 
 /** 表格列属性 */
 const columns: ColumnsType<DishProps> = [
@@ -24,6 +27,11 @@ const columns: ColumnsType<DishProps> = [
     key: 'desc',
     dataIndex: 'desc',
     title: '描述',
+    render: (desc) => (
+      <Tooltip title={desc}>
+        <Text className={less.desc} ellipsis>{desc}</Text>
+      </Tooltip>
+    ),
   },
   {
     key: 'pic',
@@ -53,7 +61,10 @@ const columns: ColumnsType<DishProps> = [
     dataIndex: 'did',
     title: '操作',
     render: (did) => (
-      <EditButton did={did} />
+      <Space>
+        <EditButton did={did} />
+        <ToggleButton did={did} />
+      </Space>
     ),
   },
 ];
@@ -68,6 +79,18 @@ function EditButton({ did }: Props) {
   const handleClick = () => setEditMode(did);
 
   return <Button type="link" onClick={handleClick}>编辑</Button>;
+}
+
+function ToggleButton({ did }: Props) {
+  const toggleDishStatus = useToggleDishStatus();
+  const getToggleText = useGetToggleText();
+
+  const handleClick = () => toggleDishStatus(did);
+  const text = getToggleText(did);
+
+  return text ? (
+    <Button type="link" onClick={handleClick}>{text}</Button>
+  ) : null;
 }
 
 /** [container]餐品表格容器 */
