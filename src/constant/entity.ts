@@ -57,3 +57,27 @@ export interface DishForm {
   /** 餐品自定义 */
   options?: DishOption[];
 }
+
+/** 订单接口行为 */
+export const enum OrderAction {
+  /** 获取订单列表 */
+  GET,
+  /** 调整订单状态 */
+  SET,
+  /** 确认消息 */
+  CONFIRM,
+  /** 心跳消息 */
+  HEART_BEAT,
+  /** 终止连接 */
+  FINISH,
+}
+
+/** 订单状态 */
+export const enum OrderStatus {
+  /** 制作中 */
+  ON_PROCESS,
+  /** 制作完成 */
+  FINISHED,
+  /** 取消 */
+  CANCELED,
+}

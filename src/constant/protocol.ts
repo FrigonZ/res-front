@@ -1,3 +1,5 @@
+import { OrderAction, OrderStatus } from './entity';
+
 /** 返回错误码 */
 export const enum ResCode {
   /** 失败 */
@@ -18,4 +20,28 @@ export interface ResponseData<T> {
   msg: string;
   /** 返回数据 */
   data: T;
+}
+
+/** 订单数据交互参数 */
+export interface OrderOption {
+  time?: number;
+  oid?: string;
+  status?: OrderStatus;
+  wsid?: string;
+}
+
+/** socket接口统一协议 */
+export interface WebSocketUniq {
+  action: OrderAction;
+  options: OrderOption;
+  id: string;
+  data?: any;
+}
+
+export interface WebSocketResponse {
+  data: WebSocketUniq[];
+}
+
+export interface WebSocketRequest {
+  data: WebSocketUniq[];
 }
