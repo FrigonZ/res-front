@@ -3,6 +3,7 @@ import { OrderAction } from '../constant/entity';
 import {
   OrderOption, WebSocketRequest, WebSocketUniq,
 } from '../constant/protocol';
+import { getToken } from './token';
 
 let client: WebSocket;
 
@@ -19,9 +20,9 @@ export const createWebSocket = (callback: (msg: string) => void) => {
   if (client) return;
   client = new WebSocket(WEBSOCKET_URL);
   const handleMessage = (e: MessageEvent<any>) => {
+    callback(e.data);
     removeTimer();
     initTimer();
-    callback(e.data);
   };
   client.addEventListener('message', handleMessage);
   initTimer();
@@ -37,6 +38,7 @@ export const sendWsMessage = () => {
   if (!client) return;
   if (!waitData.length) {
     const rawHeartBeat: WebSocketRequest = {
+      authorization: getToken(),
       data: [{
         action: OrderAction.HEART_BEAT,
         options: {},
@@ -47,6 +49,7 @@ export const sendWsMessage = () => {
     return;
   }
   const rawRequest: WebSocketRequest = {
+    authorization: getToken(),
     data: waitData,
   };
   client.send(JSON.stringify(rawRequest));
