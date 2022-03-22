@@ -1,12 +1,13 @@
 import { Button } from 'antd';
-import React, { useState } from 'react';
+import React from 'react';
 import { closeWebSocket, createWebSocket } from '../../utils/ws';
+import { useHandleMessage } from './hooks';
 
 function Main() {
-  const [data, setData] = useState('');
+  const handleMessage = useHandleMessage();
 
   const handleConnect = () => {
-    createWebSocket((msg: string) => setData(msg));
+    createWebSocket(handleMessage);
   };
 
   return (
@@ -14,7 +15,6 @@ function Main() {
       <div>Main</div>
       <Button onClick={handleConnect}>connect</Button>
       <Button onClick={closeWebSocket}>disconnect</Button>
-      <div>{data}</div>
     </div>
   );
 }

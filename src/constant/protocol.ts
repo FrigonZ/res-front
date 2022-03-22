@@ -43,5 +43,6 @@ export interface WebSocketResponse {
 }
 
 export interface WebSocketRequest {
+  authorization: string;
   data: WebSocketUniq[];
 }
