@@ -2,12 +2,12 @@
 import { Button } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import {
-  Link, Navigate,
-} from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import IconLink from '../../components/icon-link';
 import { State } from '../../constant/store';
 import { routers } from '../route';
 import { useLogOut } from './hooks';
+import less from './page-frame.module.less';
 
 export interface Props {
   children?: React.ReactNode;
@@ -19,13 +19,19 @@ function PageFrame({ children = null }:Props) {
   const { isLogin } = useSelector((state: State) => state.user);
 
   return isLogin ? (
-    <>
-      {routers.map((page) => (
-        <Link key={page.path} to={page.path}>{page.name}</Link>
-      ))}
-      <Button onClick={logOut}>退出</Button>
-      {children}
-    </>
+    <div className={less.wrap}>
+      <div className={less.left}>
+        <div className={less.links}>
+          {routers.map((page) => (
+            <IconLink key={page.path} to={page.path} icon={page.icon} hint={page.name} />
+          ))}
+        </div>
+        <Button type="link" onClick={logOut}>退出</Button>
+      </div>
+      <div className={less.right}>
+        {children}
+      </div>
+    </div>
   ) : (
     <Navigate to="/login" />
   );
