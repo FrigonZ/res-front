@@ -9,11 +9,12 @@ const url = 'http://localhost:3000';
 function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1280,
+    height: 800,
     webPreferences: {
       nodeIntegration: true,
     },
+    
   });
 
   // load the index.html from a url
