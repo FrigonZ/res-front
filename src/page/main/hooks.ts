@@ -2,8 +2,10 @@ import { message } from 'antd';
 import { useCallback } from 'react';
 import { OrderAction } from '../../constant/entity';
 import { WebSocketResponse } from '../../constant/protocol';
+import { useSetIsRunning } from '../../store/busi/hooks';
 import { useSetIsLogin } from '../../store/user/hooks';
 import { removeToken } from '../../utils/token';
+import { createWebSocket } from '../../utils/ws';
 
 export const useHandleMessage = () => {
   const setLogin = useSetIsLogin();
@@ -27,4 +29,13 @@ export const useHandleMessage = () => {
       handler();
     });
   }, [setLogin]);
+};
+
+export const useStartBusi = () => {
+  const setIsRunning = useSetIsRunning();
+  const handleMsg = useHandleMessage();
+  return useCallback(() => {
+    setIsRunning(true);
+    createWebSocket(handleMsg);
+  }, [setIsRunning, handleMsg]);
 };
