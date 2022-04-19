@@ -12,6 +12,8 @@ export interface State {
   user: UserState;
   /** 餐品模块状态 */
   dish: DishState;
+  /** 实时运营模块 */
+  busi: BusiState;
 }
 
 /** 用户模块默认状态 */
@@ -26,6 +28,11 @@ export const dishState: DishState = {
   dishes: [],
   initialDish: null,
   editId: '',
+};
+
+/** 实时默认运营模块 */
+export const busiState: BusiState = {
+  isRunning: false,
 };
 
 /** 用户模块状态 */
@@ -46,4 +53,10 @@ export interface DishState {
   initialDish: DishForm | null;
   /** 编辑餐品id */
   editId: string;
+}
+
+/** 实时运营模块 */
+export interface BusiState {
+  /** 当前运营状态 */
+  isRunning: boolean;
 }

@@ -11,10 +11,10 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 1280,
     height: 800,
+    resizable: false,
     webPreferences: {
       nodeIntegration: true,
     },
-    
   });
 
   // load the index.html from a url

@@ -5,6 +5,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 1280px;
+}
+
+* {
+  user-select: none;
 }
 
 code {
@@ -13,13 +18,13 @@ code {
 }
 
 #root {
-  width: 100%;
+  width: 1280px;
   height: 100%;
 }
 
 .App {
   position: relative;
-  width: 100%;
+  width: 1280px;
   height: 100%;
 }
 

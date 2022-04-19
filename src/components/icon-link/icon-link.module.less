@@ -1,42 +1,31 @@
 .image {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     object-fit: cover;
 }
 
 .selected {
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    opacity: 1;
+    margin-bottom: 20px;
 }
 
 .wrap {
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     opacity: 0.4;
+    margin-bottom: 20px;
+}
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .wrap:hover {
     opacity: 1;
 }
 
-.selected-bar {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 2px;
-    height: 48px;
-    display: block;
-    background-color: #333;
-}
-
-.relative {
-    position: relative;
-    width: 48px;
-    height: 48px;
+.hint {
+    font-size: 20px;
+    color: #2B0500;
+    margin-left: 16px;
 }
