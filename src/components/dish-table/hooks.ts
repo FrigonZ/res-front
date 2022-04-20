@@ -63,3 +63,13 @@ export const useGetToggleText = () => {
     return dish.status === DishStatus.NORMAL ? '下架' : '上架';
   }, [dishes]);
 };
+
+export const useGetGroupName = () => {
+  const { groups } = useSelector((state: State) => state.dish);
+  return useCallback((gid: number) => {
+    const target = groups.find((group) => group.gid === gid);
+    if (!target) return '无分类';
+
+    return target.name;
+  }, [groups]);
+};

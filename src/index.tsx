@@ -1,12 +1,13 @@
 /* eslint-disable no-console */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import { Provider } from 'react-redux';
+import { ConfigProvider } from 'antd';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { store } from './store';
 import 'antd/dist/antd.min.css';
+import './index.less';
 
 const consoleError = console.error.bind(console);
 
@@ -16,6 +17,12 @@ console.error = (errObj, ...args) => {
   }
   consoleError(errObj, ...args);
 };
+
+ConfigProvider.config({
+  theme: {
+    primaryColor: '#AD2102',
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>

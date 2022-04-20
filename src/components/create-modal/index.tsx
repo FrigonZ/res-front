@@ -1,7 +1,7 @@
 /** [container]新增餐品弹窗容器 */
 import {
   Button,
-  Form, Input, Modal, Radio,
+  Form, Input, Modal, Radio, Select,
 } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -22,7 +22,9 @@ const initialValue = {
 
 /** [container]新增餐品弹窗容器 */
 function CreateModal() {
-  const { createModalVisible, initialDish, editId } = useSelector((state: State) => state.dish);
+  const {
+    createModalVisible, initialDish, editId, groups,
+  } = useSelector((state: State) => state.dish);
   const closeModal = useCloseModal();
   const [form] = Form.useForm();
   const [url, setUrl] = useState('');
@@ -128,6 +130,17 @@ function CreateModal() {
           rules={[{ required: true, message: '请输入餐品价格' }]}
         >
           <Input type="number" />
+        </Form.Item>
+        <Form.Item
+          name="group"
+          label="分组"
+        >
+          <Select>
+            <Select.Option value={-1}>无分类</Select.Option>
+            {groups.map((group) => (
+              <Select.Option value={group.gid}>{group.name}</Select.Option>
+            ))}
+          </Select>
         </Form.Item>
         <Form.Item
           name="desc"

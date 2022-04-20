@@ -9,4 +9,5 @@ export const CGI = {
   LOGIN: '/nimda/admin',
   COS: '/file',
   DISH: '/dish',
+  GROUP: '/group',
 };

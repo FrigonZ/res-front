@@ -37,6 +37,8 @@ export interface DishProps {
   status?: DishStatus;
   /** 餐品自定义 */
   options?: DishOption[];
+  /** 分组 */
+  group?: number;
 }
 
 export interface DishForm {
@@ -82,4 +84,9 @@ export const enum OrderStatus {
   FINISHED,
   /** 取消 */
   CANCELED,
+}
+
+export interface DishGroup {
+  gid: number,
+  name: string,
 }

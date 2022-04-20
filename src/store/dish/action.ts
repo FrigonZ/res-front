@@ -1,4 +1,4 @@
-import { DishForm, DishProps } from '../../constant/entity';
+import { DishForm, DishGroup, DishProps } from '../../constant/entity';
 import { Action } from '../../constant/store';
 
 export const enum DishAction {
@@ -8,6 +8,9 @@ export const enum DishAction {
   SET_IS_FETCHING_DISH = 'SET_IS_FETCHING_DISH',
   SET_INITIAL_DISH = 'SET_INITIAL_DISH',
   SET_EDIT_DISH_ID = 'SET_EDIT_DISH_ID',
+  SET_SUB_DISHES = 'SET_SUB_DISHES',
+  SET_GROUP_MODAL_VISIBLE = 'SET_GROUP_MODAL_VISIBLE',
+  SET_GROUPS = 'SET_GROUPS',
 }
 
 export interface SetCreateModalVisiblePaylod {
@@ -32,6 +35,18 @@ export interface SetInitialDishPayload {
 
 export interface SetEditDishIdPayload {
   editId: string;
+}
+
+export interface SetSubDishesPayload {
+  subDishes: DishProps[];
+}
+
+export interface SetGroupModalVisiblePayload {
+  groupModalVisible: boolean;
+}
+
+export interface SetGroupsPayload {
+  groups: DishGroup[];
 }
 
 export const setCreateModalVisable = (payload: SetCreateModalVisiblePaylod): Action => ({
@@ -61,5 +76,20 @@ export const setInitialDish = (payload: SetInitialDishPayload): Action => ({
 
 export const setEditDishId = (payload: SetEditDishIdPayload): Action => ({
   type: DishAction.SET_EDIT_DISH_ID,
+  payload,
+});
+
+export const setSubDishes = (payload: SetSubDishesPayload): Action => ({
+  type: DishAction.SET_SUB_DISHES,
+  payload,
+});
+
+export const setGroupModalVisible = (payload: SetGroupModalVisiblePayload): Action => ({
+  type: DishAction.SET_GROUP_MODAL_VISIBLE,
+  payload,
+});
+
+export const setGroups = (payload: SetGroupsPayload): Action => ({
+  type: DishAction.SET_GROUPS,
   payload,
 });

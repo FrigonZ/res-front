@@ -1,8 +1,16 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { DishForm, DishProps } from '../../constant/entity';
+import { DishForm, DishGroup, DishProps } from '../../constant/entity';
 import {
-  addDishes, setCreateModalVisable, setDishes, setEditDishId, setInitialDish, setIsFetching,
+  addDishes,
+  setCreateModalVisable,
+  setDishes,
+  setEditDishId,
+  setGroupModalVisible,
+  setGroups,
+  setInitialDish,
+  setIsFetching,
+  setSubDishes,
 } from './action';
 
 /** 设置新增餐品弹窗可视度 */
@@ -53,6 +61,30 @@ export const useSetEditDishId = () => {
   const dispatch = useDispatch();
   return useCallback((editId: string) => {
     const action = setEditDishId({ editId });
+    dispatch(action);
+  }, [dispatch]);
+};
+
+export const useSetSubDishes = () => {
+  const dispatch = useDispatch();
+  return useCallback((subDishes: DishProps[]) => {
+    const action = setSubDishes({ subDishes });
+    dispatch(action);
+  }, [dispatch]);
+};
+
+export const useSetGroupModalVisible = () => {
+  const dispatch = useDispatch();
+  return useCallback((groupModalVisible: boolean) => {
+    const action = setGroupModalVisible({ groupModalVisible });
+    dispatch(action);
+  }, [dispatch]);
+};
+
+export const useSetGroups = () => {
+  const dispatch = useDispatch();
+  return useCallback((groups: DishGroup[]) => {
+    const action = setGroups({ groups });
     dispatch(action);
   }, [dispatch]);
 };
