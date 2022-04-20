@@ -1,5 +1,5 @@
 import { Action as Act } from 'redux';
-import { DishForm, DishProps } from './entity';
+import { DishForm, DishGroup, DishProps } from './entity';
 
 /** redux-action */
 export interface Action extends Act<string> {
@@ -28,6 +28,9 @@ export const dishState: DishState = {
   dishes: [],
   initialDish: null,
   editId: '',
+  subDishes: [],
+  groupModalVisible: false,
+  groups: [],
 };
 
 /** 实时默认运营模块 */
@@ -53,6 +56,12 @@ export interface DishState {
   initialDish: DishForm | null;
   /** 编辑餐品id */
   editId: string;
+  /** 餐品搜索结果 */
+  subDishes: DishProps[];
+  /** 分组管理弹窗 */
+  groupModalVisible: boolean;
+  /** 分组 */
+  groups: DishGroup[];
 }
 
 /** 实时运营模块 */

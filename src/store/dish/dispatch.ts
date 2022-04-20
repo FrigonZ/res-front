@@ -6,8 +6,11 @@ import {
   SetCreateModalVisiblePaylod,
   SetDishesPayload,
   SetEditDishIdPayload,
+  SetGroupModalVisiblePayload,
+  SetGroupsPayload,
   SetInitialDishPayload,
   SetIsFetchingPayload,
+  SetSubDishesPayload,
 } from './action';
 
 const setCreateModalVisable = (state: DishState, action: Action): DishState => {
@@ -61,6 +64,30 @@ const setEditDishId = (state: DishState, action: Action): DishState => {
   };
 };
 
+const setSubDishes = (state: DishState, action: Action): DishState => {
+  const { subDishes } = action.payload as SetSubDishesPayload;
+  return {
+    ...state,
+    subDishes,
+  };
+};
+
+const setGroupModalVisible = (state: DishState, action: Action): DishState => {
+  const { groupModalVisible } = action.payload as SetGroupModalVisiblePayload;
+  return {
+    ...state,
+    groupModalVisible,
+  };
+};
+
+const setGroups = (state: DishState, action: Action): DishState => {
+  const { groups } = action.payload as SetGroupsPayload;
+  return {
+    ...state,
+    groups,
+  };
+};
+
 const defaultHandler = (state: DishState): DishState => ({ ...state });
 
 const handleActionMap = {
@@ -70,6 +97,9 @@ const handleActionMap = {
   [DishAction.SET_IS_FETCHING_DISH]: setIsFetching,
   [DishAction.SET_INITIAL_DISH]: setInitialDish,
   [DishAction.SET_EDIT_DISH_ID]: setEditDishId,
+  [DishAction.SET_SUB_DISHES]: setSubDishes,
+  [DishAction.SET_GROUP_MODAL_VISIBLE]: setGroupModalVisible,
+  [DishAction.SET_GROUPS]: setGroups,
 };
 
 export const dish = (state: DishState = dishState, action: Action): DishState => {
