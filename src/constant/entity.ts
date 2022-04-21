@@ -90,3 +90,22 @@ export interface DishGroup {
   gid: number,
   name: string,
 }
+
+export interface OrderDish {
+  did: number;
+  option?: DishOption;
+}
+
+export interface FormatDish extends OrderDish {
+  num: number;
+}
+
+export interface Order {
+  oid: number;
+  time: Date;
+  status: OrderStatus;
+  seat: string;
+  uid: number;
+  dishes: OrderDish[];
+  price: number;
+}

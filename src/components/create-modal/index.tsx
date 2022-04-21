@@ -138,7 +138,7 @@ function CreateModal() {
           <Select>
             <Select.Option value={-1}>无分类</Select.Option>
             {groups.map((group) => (
-              <Select.Option value={group.gid}>{group.name}</Select.Option>
+              <Select.Option key={group.gid} value={group.gid}>{group.name}</Select.Option>
             ))}
           </Select>
         </Form.Item>

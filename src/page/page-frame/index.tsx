@@ -21,7 +21,7 @@ function PageFrame({ children = null }:Props) {
   const logOut = useLogOut();
   const location = useLocation();
   const { isLogin } = useSelector((state: State) => state.user);
-  const { isRunning } = useSelector((state: State) => state.busi);
+  const { isRunning, orders } = useSelector((state: State) => state.busi);
   const stopBusi = useStopBusi();
   const date = getDate();
 
@@ -65,7 +65,7 @@ function PageFrame({ children = null }:Props) {
               </div>
             </Link>
             <div className={less.ordernum}>
-              <span>0</span>
+              <span>{orders.length}</span>
             </div>
           </div>
         </div>
