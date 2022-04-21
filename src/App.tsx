@@ -7,9 +7,11 @@ import Login from './page/login';
 import PageFrame from './page/page-frame';
 import { routers } from './page/route';
 import { useSetIsLogin } from './store/user/hooks';
+import { useFetchDishes } from './page/dish/hooks';
 
 function App() {
   const setLogin = useSetIsLogin();
+  const fetchDishes = useFetchDishes();
   const [isLoading, setLoading] = useState(true);
 
   // 初始化登录状态
@@ -21,6 +23,10 @@ function App() {
       setLoading(false);
     });
   }, [setLogin]);
+
+  useEffect(() => {
+    fetchDishes();
+  }, [fetchDishes]);
 
   return (
     <HashRouter>

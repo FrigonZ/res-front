@@ -22,7 +22,7 @@ function GroupModal() {
     >
       <Search enterButton="新增" placeholder="新分组名" ref={input} onSearch={createGroup} />
       <div className={less.tags}>
-        {groups.map((group) => <Tag color="orange">{group.name}</Tag>)}
+        {groups.map((group) => <Tag key={group.gid} color="orange">{group.name}</Tag>)}
       </div>
     </Modal>
   );

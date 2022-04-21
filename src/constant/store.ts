@@ -1,5 +1,7 @@
 import { Action as Act } from 'redux';
-import { DishForm, DishGroup, DishProps } from './entity';
+import {
+  DishForm, DishGroup, DishProps, Order,
+} from './entity';
 
 /** redux-action */
 export interface Action extends Act<string> {
@@ -36,6 +38,7 @@ export const dishState: DishState = {
 /** 实时默认运营模块 */
 export const busiState: BusiState = {
   isRunning: false,
+  orders: [],
 };
 
 /** 用户模块状态 */
@@ -68,4 +71,6 @@ export interface DishState {
 export interface BusiState {
   /** 当前运营状态 */
   isRunning: boolean;
+  /** 当前订单 */
+  orders: Order[];
 }
