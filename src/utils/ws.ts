@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import { WEBSOCKET_URL } from '../constant/cgi';
 import { OrderAction } from '../constant/entity';
 import {
@@ -5,7 +6,7 @@ import {
 } from '../constant/protocol';
 import { getToken } from './token';
 
-let client: WebSocket;
+let client: WebSocket | null;
 
 /** 心跳频率 1分钟 */
 const HEART_BEAT_STEP = 60000;
@@ -16,6 +17,11 @@ let timer: NodeJS.Timer;
 
 let socketId = 0;
 
+const handleClose = () => {
+  closeWebSocket();
+  message.info('连接中断');
+};
+
 export const createWebSocket = (callback: (msg: string) => void) => {
   if (client) return;
   client = new WebSocket(WEBSOCKET_URL);
@@ -25,6 +31,7 @@ export const createWebSocket = (callback: (msg: string) => void) => {
     initTimer();
   };
   client.addEventListener('message', handleMessage);
+  client.addEventListener('close', handleClose);
   initTimer();
 };
 
@@ -32,6 +39,7 @@ export const closeWebSocket = () => {
   if (!client) return;
   removeTimer();
   client.close();
+  client = null;
 };
 
 export const sendWsMessage = () => {
