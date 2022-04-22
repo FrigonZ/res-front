@@ -10,4 +10,5 @@ export const CGI = {
   COS: '/file',
   DISH: '/dish',
   GROUP: '/group',
+  ORDER: '/order',
 };

@@ -23,7 +23,7 @@ export const useAddOrders = () => {
   }, [dispatch, origins]);
 };
 
-export const useFinishOrder = () => {
+export const useRemoveOrder = () => {
   const dispatch = useDispatch();
   const { orders: origins } = useSelector((state:State) => state.busi);
   return useCallback((oid: number) => {
