@@ -1,14 +1,15 @@
 import { message } from 'antd';
 import { useCallback } from 'react';
 import { OrderAction } from '../../constant/entity';
-import { WebSocketResponse } from '../../constant/protocol';
-import { useSetIsRunning } from '../../store/busi/hooks';
+import { WebSocketResponse, WebSocketUniq } from '../../constant/protocol';
+import { useAddOrders, useSetIsRunning } from '../../store/busi/hooks';
 import { useSetIsLogin } from '../../store/user/hooks';
 import { removeToken } from '../../utils/token';
-import { createWebSocket } from '../../utils/ws';
+import { addWaitData, createWebSocket } from '../../utils/ws';
 
 export const useHandleMessage = () => {
   const setLogin = useSetIsLogin();
+  const addOrders = useAddOrders();
 
   return useCallback((msg: string) => {
     const response = JSON.parse(msg) as WebSocketResponse;
@@ -19,16 +20,27 @@ export const useHandleMessage = () => {
         setLogin(false);
       },
       [OrderAction.GET]: () => null,
-      [OrderAction.SET]: () => null,
+      [OrderAction.SET]: (wsUniq: WebSocketUniq) => {
+        const { orders } = wsUniq.data || {};
+        if (orders) {
+          addOrders(orders);
+          addWaitData({
+            action: OrderAction.CONFIRM,
+            options: {
+              oid: wsUniq.id,
+            },
+          });
+        }
+      },
       [OrderAction.CONFIRM]: () => null,
       [OrderAction.HEART_BEAT]: () => null,
       [OrderAction.FINISH]: () => null,
     };
     response.data.forEach((wsUniq) => {
       const handler = map[wsUniq.action];
-      handler();
+      handler(wsUniq);
     });
-  }, [setLogin]);
+  }, [setLogin, addOrders]);
 };
 
 export const useStartBusi = () => {

@@ -16,6 +16,8 @@ export interface State {
   dish: DishState;
   /** 实时运营模块 */
   busi: BusiState;
+  /** 订单模块状态 */
+  order: OrderState;
 }
 
 /** 用户模块默认状态 */
@@ -38,6 +40,10 @@ export const dishState: DishState = {
 /** 实时默认运营模块 */
 export const busiState: BusiState = {
   isRunning: false,
+  orders: [],
+};
+
+export const orderState: OrderState = {
   orders: [],
 };
 
@@ -73,4 +79,9 @@ export interface BusiState {
   isRunning: boolean;
   /** 当前订单 */
   orders: Order[];
+}
+
+export interface OrderState {
+  /** 订单 */
+  orders: Order[],
 }

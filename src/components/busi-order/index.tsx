@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Order, OrderDish } from '../../constant/entity';
-import { formatTime } from '../../utils/time';
 import less from './busi-order.module.less';
 import { countDish } from './helper';
-import { useGetDishName } from './hooks';
+import { useCancelOrder, useFinishOrder, useGetDishName } from './hooks';
 
 interface Props {
   order: Order;
@@ -38,15 +37,17 @@ function BusiDishes({ dishes }: DishesProps) {
 
 function BusiOrder({ order }: Props) {
   const {
-    oid, time, seat, dishes, price,
+    oid, formatDate, seat, dishes, price,
   } = order;
+  const finishOrder = useFinishOrder();
+  const cancelOrder = useCancelOrder();
 
   return (
     <div className={less.wrap}>
       <div className={less.top}>
         <div className={less.title}>
           <span className={less.dark}>{`订单号:#${oid}`}</span>
-          <span className={less.light}>{`订单时间:${formatTime(time)}`}</span>
+          <span className={less.light}>{`订单时间:${formatDate}`}</span>
         </div>
         <span className={less.dark}>{`座位号:#${seat}`}</span>
       </div>
@@ -54,10 +55,10 @@ function BusiOrder({ order }: Props) {
       <div className={less.bottom}>
         <span className={less.price}>{`消费:¥${price}`}</span>
         <div className={less.buttons}>
-          <div className={less.cancel}>
+          <div className={less.cancel} onClick={() => cancelOrder(oid)}>
             <span>取消订单</span>
           </div>
-          <div className={less.finish}>
+          <div className={less.finish} onClick={() => finishOrder(oid)}>
             <span>完成订单</span>
           </div>
         </div>

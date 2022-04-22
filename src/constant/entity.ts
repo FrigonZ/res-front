@@ -108,4 +108,5 @@ export interface Order {
   uid: number;
   dishes: OrderDish[];
   price: number;
+  formatDate: string;
 }
