@@ -6,6 +6,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { DishProps, DishStatus } from '../../constant/entity';
 import { State } from '../../constant/store';
+import { stringsifyOptions } from '../../utils/dish';
 import less from './dish-table.module.less';
 import {
   useGetGroupName, useGetToggleText, useSetEditMode, useToggleDishStatus,
@@ -110,6 +111,11 @@ function DishTable() {
       key: 'options',
       dataIndex: 'options',
       title: '自定义',
+      render: (options) => (options?.length ? (
+        <Tooltip title={stringsifyOptions(options, true)}>
+          <a>查看</a>
+        </Tooltip>
+      ) : <span>无</span>),
     },
     {
       key: 'action',
