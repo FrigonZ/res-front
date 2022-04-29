@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Order, OrderDish } from '../../constant/entity';
+import { stringsifyOptions } from '../../utils/dish';
 import less from './busi-order.module.less';
 import { countDish } from './helper';
 import { useCancelOrder, useFinishOrder, useGetDishName } from './hooks';
@@ -26,7 +27,7 @@ function BusiDishes({ dishes }: DishesProps) {
       {
         isFolded
           ? formatDishes.slice(0, 3).map((dish) => <div key={dish.did} className={less.light}>{`${dish.num}x    ${getDishName(dish.did)}`}</div>)
-          : formatDishes.map((dish) => <div key={dish.did} className={less.light}>{`${dish.num}x    ${getDishName(dish.did)}`}</div>)
+          : formatDishes.map((dish) => <div key={dish.did} className={less.light}>{`${dish.num}x    ${getDishName(dish.did)}    ${stringsifyOptions(dish.option || [])}`}</div>)
       }
       {
         canFold ? <div className={less.fold} onClick={toggleFold}>{text}</div> : null

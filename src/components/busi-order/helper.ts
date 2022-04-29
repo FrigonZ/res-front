@@ -2,7 +2,9 @@ import { FormatDish, OrderDish } from '../../constant/entity';
 
 export const countDish = (dishes: OrderDish[]) => {
   const formatDishes: FormatDish[] = [];
-  dishes.forEach((dish) => {
+  const dishesWithOptions = dishes.filter((dish) => dish.option?.length);
+  const pureDishes = dishes.filter((dish) => !dish.option?.length);
+  pureDishes.forEach((dish) => {
     const target = formatDishes.findIndex((formatDish) => formatDish.did === dish.did);
     if (target === -1) {
       formatDishes.push({
@@ -16,5 +18,11 @@ export const countDish = (dishes: OrderDish[]) => {
       };
     }
   });
-  return formatDishes;
+  return [
+    ...formatDishes,
+    ...dishesWithOptions.map((dish) => ({
+      ...dish,
+      num: 1,
+    })),
+  ];
 };
