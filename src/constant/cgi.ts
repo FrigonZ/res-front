@@ -11,4 +11,5 @@ export const CGI = {
   DISH: '/dish',
   GROUP: '/group',
   ORDER: '/order',
+  DISCOUNT: '/discount',
 };

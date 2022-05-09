@@ -4,6 +4,8 @@ import {
   AddDishesPayload,
   DishAction,
   SetCreateModalVisiblePaylod,
+  SetDiscountModalVisiblePayload,
+  SetDiscountPayload,
   SetDishesPayload,
   SetEditDishIdPayload,
   SetGroupModalVisiblePayload,
@@ -88,6 +90,22 @@ const setGroups = (state: DishState, action: Action): DishState => {
   };
 };
 
+const setDiscountModalVisible = (state: DishState, action: Action): DishState => {
+  const { discountModalVisible } = action.payload as SetDiscountModalVisiblePayload;
+  return {
+    ...state,
+    discountModalVisible,
+  };
+};
+
+const setDiscount = (state: DishState, action: Action): DishState => {
+  const { discounts } = action.payload as SetDiscountPayload;
+  return {
+    ...state,
+    discounts,
+  };
+};
+
 const defaultHandler = (state: DishState): DishState => ({ ...state });
 
 const handleActionMap = {
@@ -100,6 +118,8 @@ const handleActionMap = {
   [DishAction.SET_SUB_DISHES]: setSubDishes,
   [DishAction.SET_GROUP_MODAL_VISIBLE]: setGroupModalVisible,
   [DishAction.SET_GROUPS]: setGroups,
+  [DishAction.SET_DISCOUNT_MODAL_VISIBLE]: setDiscountModalVisible,
+  [DishAction.SET_DISCOUNT]: setDiscount,
 };
 
 export const dish = (state: DishState = dishState, action: Action): DishState => {

@@ -1,5 +1,6 @@
 import { Action as Act } from 'redux';
 import {
+  Discount,
   DishForm, DishGroup, DishProps, Order,
 } from './entity';
 
@@ -35,6 +36,8 @@ export const dishState: DishState = {
   subDishes: [],
   groupModalVisible: false,
   groups: [],
+  discountModalVisible: false,
+  discounts: [],
 };
 
 /** 实时默认运营模块 */
@@ -71,6 +74,10 @@ export interface DishState {
   groupModalVisible: boolean;
   /** 分组 */
   groups: DishGroup[];
+  /** 分组管理弹窗 */
+  discountModalVisible: boolean;
+  /** 分组 */
+  discounts: Discount[];
 }
 
 /** 实时运营模块 */

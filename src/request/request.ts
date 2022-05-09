@@ -91,6 +91,21 @@ export const usePut = () => {
   }, [getHandler]);
 };
 
+/** put请求, 响应自动处理 */
+export const useDelete = () => {
+  const getHandler = useResponseHandler();
+  return useCallback(async (url: string, data: any) => {
+    const result = await instance.delete(url, data);
+    const { code, msg, data: resData } = result.data as ResponseData<any>;
+    const handler = getHandler(code);
+    if (handler(msg)) {
+      return resData;
+    }
+
+    return null;
+  }, [getHandler]);
+};
+
 /** get请求, 响应自动处理 */
 export const useGet = () => {
   const getHandler = useResponseHandler();
