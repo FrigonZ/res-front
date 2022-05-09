@@ -88,6 +88,12 @@ export interface DishGroup {
   name: string,
 }
 
+export interface Discount {
+  did?: number;
+  standard: number;
+  discount: number;
+}
+
 export interface OrderDish {
   did: number;
   option?: DishOption[];

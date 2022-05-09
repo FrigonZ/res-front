@@ -1,4 +1,6 @@
-import { DishForm, DishGroup, DishProps } from '../../constant/entity';
+import {
+  Discount, DishForm, DishGroup, DishProps,
+} from '../../constant/entity';
 import { Action } from '../../constant/store';
 
 export const enum DishAction {
@@ -11,6 +13,8 @@ export const enum DishAction {
   SET_SUB_DISHES = 'SET_SUB_DISHES',
   SET_GROUP_MODAL_VISIBLE = 'SET_GROUP_MODAL_VISIBLE',
   SET_GROUPS = 'SET_GROUPS',
+  SET_DISCOUNT_MODAL_VISIBLE = 'SET_DISCOUNT_MODAL_VISIBLE',
+  SET_DISCOUNT = 'SET_DISCOUNT',
 }
 
 export interface SetCreateModalVisiblePaylod {
@@ -47,6 +51,14 @@ export interface SetGroupModalVisiblePayload {
 
 export interface SetGroupsPayload {
   groups: DishGroup[];
+}
+
+export interface SetDiscountModalVisiblePayload {
+  discountModalVisible: boolean;
+}
+
+export interface SetDiscountPayload {
+  discounts: Discount[];
 }
 
 export const setCreateModalVisable = (payload: SetCreateModalVisiblePaylod): Action => ({
@@ -91,5 +103,15 @@ export const setGroupModalVisible = (payload: SetGroupModalVisiblePayload): Acti
 
 export const setGroups = (payload: SetGroupsPayload): Action => ({
   type: DishAction.SET_GROUPS,
+  payload,
+});
+
+export const setDiscountModalVisible = (payload: SetDiscountModalVisiblePayload): Action => ({
+  type: DishAction.SET_DISCOUNT_MODAL_VISIBLE,
+  payload,
+});
+
+export const setDiscount = (payload: SetDiscountPayload): Action => ({
+  type: DishAction.SET_DISCOUNT,
   payload,
 });

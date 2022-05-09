@@ -6,6 +6,8 @@ import { State } from '../../constant/store';
 import { useGet } from '../../request/request';
 import {
   useSetCreateModalVisible,
+  useSetDiscount,
+  useSetDiscountModalVisible,
   useSetDishes,
   useSetGroupModalVisible,
   useSetGroups,
@@ -62,6 +64,13 @@ export const useOpenGroupModal = () => {
   }, [setGroupModalVisible]);
 };
 
+export const useOpenDiscountModal = () => {
+  const setDiscountModalVisible = useSetDiscountModalVisible();
+  return useCallback(() => {
+    setDiscountModalVisible(true);
+  }, [setDiscountModalVisible]);
+};
+
 export const useFetchGroups = () => {
   const doGet = useGet();
   const setGroups = useSetGroups();
@@ -73,4 +82,17 @@ export const useFetchGroups = () => {
 
     setGroups(groups);
   }, [doGet, setGroups]);
+};
+
+export const useFetchDiscounts = () => {
+  const doGet = useGet();
+  const setDiscount = useSetDiscount();
+  return useCallback(async () => {
+    const { discounts } = await doGet(CGI.DISCOUNT, {});
+    if (!discounts || !discounts.length) {
+      return;
+    }
+
+    setDiscount(discounts);
+  }, [doGet, setDiscount]);
 };

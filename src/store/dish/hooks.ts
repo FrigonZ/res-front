@@ -1,9 +1,13 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { DishForm, DishGroup, DishProps } from '../../constant/entity';
+import {
+  Discount, DishForm, DishGroup, DishProps,
+} from '../../constant/entity';
 import {
   addDishes,
   setCreateModalVisable,
+  setDiscount,
+  setDiscountModalVisible,
   setDishes,
   setEditDishId,
   setGroupModalVisible,
@@ -85,6 +89,22 @@ export const useSetGroups = () => {
   const dispatch = useDispatch();
   return useCallback((groups: DishGroup[]) => {
     const action = setGroups({ groups });
+    dispatch(action);
+  }, [dispatch]);
+};
+
+export const useSetDiscountModalVisible = () => {
+  const dispatch = useDispatch();
+  return useCallback((discountModalVisible: boolean) => {
+    const action = setDiscountModalVisible({ discountModalVisible });
+    dispatch(action);
+  }, [dispatch]);
+};
+
+export const useSetDiscount = () => {
+  const dispatch = useDispatch();
+  return useCallback((discounts: Discount[]) => {
+    const action = setDiscount({ discounts });
     dispatch(action);
   }, [dispatch]);
 };
